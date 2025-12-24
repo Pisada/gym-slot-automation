@@ -1,6 +1,6 @@
 # Gym Slot Automation (WPF)
 
-Windows desktop app to automate gym slot booking with a clean UI, countdown-to-midnight helper, and live log view. Uses Playwright under the hood.
+Windows desktop app to automate gym slot booking with a minimalist UI, countdown-to-midnight helper, and live log view. Uses Playwright under the hood.
 
 ## Prerequisites
 - Windows 10/11
@@ -8,7 +8,7 @@ Windows desktop app to automate gym slot booking with a clean UI, countdown-to-m
 - PowerShell
 
 ## Build and package
-From the repo root (`C:\Users\alika\Desktop\gym`):
+From the repo root:
 
 ```powershell
 # Restore and build
