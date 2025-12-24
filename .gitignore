@@ -1,0 +1,29 @@
+# Build artifacts
+bin/
+obj/
+*.exe
+*.dll
+*.pdb
+
+# Playwright
+ms-playwright/
+.playwright/
+
+# IDE and tooling
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Python caches
+__pycache__/
+*.pyc
+
+# Local app data
+booking_config.json
+booking_result.png
+
+# OS
+.DS_Store
+Thumbs.db

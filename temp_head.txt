@@ -1,0 +1,220 @@
+<Window x:Class="GymBooking.Wpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework"
+        Title="Gym Booking Assistant"
+        Height="780" Width="1180"
+        MinHeight="680" MinWidth="980"
+        WindowState="Maximized"
+        ResizeMode="CanResize"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen">
+    <WindowChrome.WindowChrome>
+        <shell:WindowChrome CaptionHeight="0"
+                            CornerRadius="0"
+                            GlassFrameThickness="0"
+                            ResizeBorderThickness="8"
+                            UseAeroCaptionButtons="False" />
+    </WindowChrome.WindowChrome>
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#0B1426" Offset="0" />
+                <GradientStop Color="#0A1222" Offset="0.45" />
+                <GradientStop Color="#070F1B" Offset="1" />
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid Margin="18">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!-- Custom title bar -->
+            <Border Grid.Row="0"
+                    Background="{StaticResource SurfaceAlt}"
+                    BorderBrush="{StaticResource BorderLight}"
+                    BorderThickness="1"
+                    CornerRadius="14"
+                    Padding="12 8"
+                    shell:WindowChrome.IsHitTestVisibleInChrome="True"
+                    MouseDown="TitleBar_MouseDown">
+                <DockPanel>
+                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" VerticalAlignment="Center">
+                        <Ellipse Width="10" Height="10" Fill="{StaticResource Accent}" Margin="0 0 10 0" />
+                        <TextBlock Text="Gym Booking Assistant"
+                                   FontFamily="Segoe UI Semibold"
+                                   FontSize="13"
+                                   Foreground="{StaticResource TextPrimary}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal"
+                                DockPanel.Dock="Right"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center">
+                        <Button Content="—"
+                                Style="{StaticResource TitleBarButton}"
+                                Click="OnMinimize" />
+                        <Button Content="✕"
+                                Style="{StaticResource TitleBarButton}"
+                                Margin="8 0 0 0"
+                                Click="OnClose" />
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <!-- Header -->
+            <Grid Grid.Row="1" Margin="0 10 0 18">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <StackPanel>
+                    <TextBlock Text="Gym Booking Assistant"
+                               FontFamily="Segoe UI Semibold"
+                               FontSize="30"
+                               Foreground="{StaticResource TextPrimary}"
+                               Margin="0 0 0 6" />
+                    <TextBlock Text="Clean layout, fast to fill, and transparent status while automation runs."
+                               FontSize="13" />
+                </StackPanel>
+                <Border Grid.Column="1"
+                        Background="{StaticResource CardAlt}"
+                        BorderBrush="{StaticResource BorderLight}"
+                        BorderThickness="1"
+                        CornerRadius="12"
+                        Padding="14 10"
+                        VerticalAlignment="Center">
+                    <StackPanel>
+                        <TextBlock Text="Countdown to midnight" FontSize="11" />
+                        <TextBlock x:Name="CountdownLabel"
+                                   Text="Countdown: --:--:--"
+                                   FontFamily="Segoe UI Semibold"
+                                   FontSize="16"
+                                   Foreground="{StaticResource Accent}" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <!-- Body -->
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.6*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Left column -->
+                <StackPanel Grid.Column="0">
+                    <Border Style="{StaticResource CardStyle}" Margin="0 0 0 14">
+                        <StackPanel>
+                            <TextBlock Text="Run controls" FontSize="16" FontFamily="Segoe UI Semibold" Foreground="{StaticResource TextPrimary}" />
+                            <TextBlock Text="Start the automation when your inputs look right. Cancel immediately if you need to stop."
+                                       Margin="0 2 0 12" />
+                            <StackPanel Orientation="Horizontal">
+                                <Button x:Name="StartButton" Content="Start booking" Click="OnStart" />
+                                <Button x:Name="CancelButton" Content="Cancel" Click="OnCancel" Style="{StaticResource SecondaryButton}" Margin="10 0 0 0" />
+                            </StackPanel>
+                            <Border Background="{StaticResource SurfaceAlt}"
+                                    BorderBrush="{StaticResource BorderLight}"
+                                    BorderThickness="1"
+                                    CornerRadius="10"
+                                    Padding="10"
+                                    Margin="0 12 0 0">
+                                <TextBlock Text="If you enable Remember below, we'll keep credentials locally so you can launch faster next time."
+                                           FontSize="11" />
+                            </Border>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Style="{StaticResource CardStyle}">
+                        <StackPanel>
+                            <TextBlock Text="Booking setup" FontSize="16" FontFamily="Segoe UI Semibold" Foreground="{StaticResource TextPrimary}" />
+                            <TextBlock Text="Credentials, target date, and preferred slot live in one place for speed."
+                                       Margin="0 2 0 14" />
+
+                            <Grid Margin="0 0 0 12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="1*" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Margin="0 0 10 0">
+                                    <TextBlock Text="Username" FontSize="12" Margin="0 0 0 4" />
+                                    <TextBox x:Name="UsernameBox" />
+                                </StackPanel>
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock Text="Password" FontSize="12" Margin="0 0 0 4" />
+                                    <PasswordBox x:Name="PasswordBox" />
+                                </StackPanel>
+                            </Grid>
+
+                            <Grid Margin="0 0 0 12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="1.1*" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Margin="0 0 10 0">
+                                    <TextBlock Text="Day" FontSize="12" Margin="0 0 0 4" />
+                                    <TextBox x:Name="DayBox" />
+                                </StackPanel>
+                                <StackPanel Grid.Column="1" Margin="0 0 10 0">
+                                    <TextBlock Text="Month" FontSize="12" Margin="0 0 0 4" />
+                                    <TextBox x:Name="MonthBox" />
+                                </StackPanel>
+                                <StackPanel Grid.Column="2">
+                                    <TextBlock Text="Day click attempts" FontSize="12" Margin="0 0 0 4" />
+                                    <TextBox x:Name="DayAttemptsBox" Text="5" />
+                                </StackPanel>
+                            </Grid>
+
+                            <Border Background="{StaticResource SurfaceAlt}"
+                                    BorderBrush="{StaticResource BorderLight}"
+                                    BorderThickness="1"
+                                    CornerRadius="10"
+                                    Padding="12"
+                                    Margin="0 0 0 12">
+                                <StackPanel>
+                                    <TextBlock Text="Preferred slot" FontSize="14" FontFamily="Segoe UI Semibold" Foreground="{StaticResource TextPrimary}" />
+                                    <UniformGrid Columns="2" Margin="0 6 0 0">
+                                        <RadioButton x:Name="Slot0" Content="14:00 - 15:30" IsChecked="True" GroupName="Slots" />
+                                        <RadioButton x:Name="Slot1" Content="15:30 - 17:00" GroupName="Slots" />
+                                        <RadioButton x:Name="Slot2" Content="17:00 - 18:30" GroupName="Slots" />
+                                        <RadioButton x:Name="Slot3" Content="18:30 - 20:00" GroupName="Slots" />
+                                    </UniformGrid>
+                                    <TextBlock Text="We'll stay on this slot unless you allow fallback below."
+                                               FontSize="11"
+                                               Margin="0 6 0 0" />
+                                </StackPanel>
+                            </Border>
+
+                            <Border Background="{StaticResource SurfaceAlt}"
+                                    BorderBrush="{StaticResource BorderLight}"
+                                    BorderThickness="1"
+                                    CornerRadius="10"
+                                    Padding="12">
+                                <StackPanel>
+                                    <TextBlock Text="Automation options" FontSize="14" FontFamily="Segoe UI Semibold" Foreground="{StaticResource TextPrimary}" Margin="0 0 0 6" />
+                                    <WrapPanel ItemHeight="28" ItemWidth="240">
+                                        <CheckBox x:Name="WaitMidnightBox" Content="Wait and start near midnight" />
+                                        <CheckBox x:Name="TryOthersBox" Content="Try other slots if primary fails" />
+                                        <CheckBox x:Name="RememberBox" Content="Remember details on this device" />
+                                    </WrapPanel>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+
+                <!-- Right column -->
+                <Grid Grid.Column="1" Margin="14 0 0 0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Border Style="{StaticResource CardStyle}" Grid.Row="0" Margin="0 0 0 14">
+                        <StackPanel>
+                            <TextBlock Text="Live status" FontSize="16" FontFamily="Segoe UI Semibold" Foreground="{StaticResource TextPrimary}" />
+                            <TextBlock Text="Quick glance information so you know when to intervene."
+                                       Margin="0 2 0 12" />
+                            <Grid>
